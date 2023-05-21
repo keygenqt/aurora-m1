@@ -6,7 +6,7 @@ SERVER_IP='192.168.1.63'
 ######
 
 MAC_RPM=$(ls $PWD/build/RPMS/*.rpm)
-SERVER_APP_FOLDER="/home/defaultuser/Projects/$APP_FOLDER"
+SERVER_APP_FOLDER="/home/$SERVER_USER/Projects/$APP_FOLDER"
 SERVER_RPM="${MAC_RPM/*Projects\//$SERVER_APP_FOLDER}"
 RPM=$(basename $SERVER_RPM)
 
