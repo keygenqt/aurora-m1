@@ -39,7 +39,7 @@ ifconfig
 Ну не фоточку же сюда крутить, скриншот красивше.
 Не забудьте и этот фиксануть IP в роутере.
 
-![Remote Login](data/Screenshot_1.png)
+![Remote Login](data/Screenshot_2.png)
 
 И того у нас должны быть "на руках":
 
