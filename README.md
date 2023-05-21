@@ -333,10 +333,19 @@ sudo systemctl status emulatorserver.service
 
 Края будут обрезанные, просто поставьте темную тему.
 Баг известен, пофиксят.
+Перейдем по SSH в эмулятор для разрешений:
+
+```shell
+ssh defaultuser@localhost -p 2223 -i ~/AuroraOS/vmshare/ssh/private_keys/sdk
+
+ssh root@localhost -p 2223 -i ~/AuroraOS/vmshare/ssh/private_keys/sdk
+```
 
 ## SSHFS
 
 Для доступа к файловой системе с проектами установим на сервер Ubuntu SSHFS:
+
+_(Путь к папке с проектами которая будет доступна для сервера у меня указана как `/Users/keygenqt/Documents/Projects`)_
 
 ```shell
 sudo apt install -y sshfs
@@ -452,7 +461,8 @@ $PSDK_DIR/sdk-chroot sdk-assistant list
 Установим скрипты:
 
 ```shell
-
+git clone https://github.com/keygenqt/aurora-m1.git
+mv aurora-m1/scripts ~/aurora_scripts
 ```
 
 В скриптах вам потребуется подправить 2 переменные, указать свои данные:
@@ -462,4 +472,34 @@ SERVER_USER='defaultuser'
 SERVER_IP='192.168.1.63'
 ```
 
-Поставим
+```shell
+vim ~/aurora_scripts/build.sh
+vim ~/aurora_scripts/install.sh
+vim ~/aurora_scripts/run.sh
+```
+
+Добавим `alias`es:
+
+```shell
+echo 'alias aurora_build="~/aurora_scripts/build.sh"' >> ~/.zprofile
+echo 'alias aurora_install="~/aurora_scripts/install.sh"' >> ~/.zprofile
+echo 'alias aurora_run="~/aurora_scripts/run.sh"' >> ~/.zprofile
+source ~/.zprofile
+```
+
+Теперь вы можете собрать совой первый проект на "Apple silicon" =)
+Удачи!
+
+```shell
+cd /Users/keygenqt/Documents/Projects
+
+git clone git@os-git.omprussia.ru:external_examples/ApplicationTemplate.git
+
+cd ApplicationTemplate
+
+aurora_build
+aurora_install
+aurora_run
+```
+
+![Done!](data/Screenshot_10.png)
